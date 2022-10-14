@@ -1,4 +1,4 @@
-package G4APIP_15.Model;
+package CampusProject.Documents.Model;
 
 public class Document {
 

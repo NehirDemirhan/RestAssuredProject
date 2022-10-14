@@ -1,6 +1,6 @@
-package G4APIP_15;
+package CampusProject.Documents;
 
-import G4APIP_15.Model.Document;
+import CampusProject.Documents.Model.Document;
 import io.restassured.http.ContentType;
 import io.restassured.http.Cookies;
 import org.apache.commons.lang3.RandomStringUtils;
