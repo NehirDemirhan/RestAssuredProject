@@ -2,7 +2,7 @@ package Campus.School.Locations.Model;
 
 import java.util.Map;
 
-public class Country {
+public class Location {
 
     private String name;
     private String code;
