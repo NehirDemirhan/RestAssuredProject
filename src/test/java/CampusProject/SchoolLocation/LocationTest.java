@@ -1,6 +1,6 @@
 package CampusProject.SchoolLocation;
 
-import Campus.School.Locations.Model.Location;
+import CampusProject.SchoolLocation.Model.Location;
 import io.restassured.http.ContentType;
 import io.restassured.http.Cookies;
 import org.apache.commons.lang3.RandomStringUtils;
