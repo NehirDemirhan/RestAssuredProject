@@ -1,4 +1,4 @@
-package Campus.School.Locations.Model;
+package CampusProject.SchoolLocation.Model;
 
 import java.util.Map;
 

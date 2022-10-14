@@ -1,4 +1,4 @@
-package Campus.School.Locations;
+package CampusProject.SchoolLocation;
 
 import Campus.School.Locations.Model.Location;
 import io.restassured.http.ContentType;
