@@ -1,6 +1,6 @@
 package Campus.School.Locations;
 
-import Campus.School.Locations.Model.Country;
+import Campus.School.Locations.Model.Location;
 import io.restassured.http.ContentType;
 import io.restassured.http.Cookies;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -13,7 +13,7 @@ import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
-public class Locations {
+public class LocationTest {
 
     Cookies cookies;
 
@@ -54,10 +54,10 @@ public class Locations {
         return RandomStringUtils.randomNumeric(4);
     }
 
-    String countryName;
-    String countryCode;
-    String countryID;
-    String countryCapacity;
+    String locationName;
+    String locationCode;
+    String locationID;
+    String locationCapacity;
     String type="CLASS";
 
     public Map<String,String> school(){
@@ -69,26 +69,26 @@ public class Locations {
 
 
     @Test(dependsOnMethods = "Login")
-    public void createCountry() {
+    public void createLocation() {
 
-        countryName = getRandomName();
-        countryCode = getRandomCode();
-        countryCapacity = getRandomCapacity();
+        locationName = getRandomName();
+        locationCode = getRandomCode();
+        locationCapacity = getRandomCapacity();
 
-        Country country = new Country();
-        country.setName(countryName);
-        country.setCode(countryCode);
-        country.setCapacity(countryCapacity);
-        country.setSchool(school());
-        country.setType(type);
+        Location location = new Location();
+        location.setName(locationName);
+        location.setCode(locationCode);
+        location.setCapacity(locationCapacity);
+        location.setSchool(school());
+        location.setType(type);
 
 
-        countryID =
+        locationID =
                 given()
 
                         .cookies(cookies)
                         .contentType(ContentType.JSON)
-                        .body(country)
+                        .body(location)
                         .when()
                         .post("school-service/api/location")
 
@@ -99,21 +99,21 @@ public class Locations {
         ;
     }
 
-    @Test(dependsOnMethods = "createCountry")
-    public void createCountryNegative() {
+    @Test(dependsOnMethods = "createLocation")
+    public void createLocationNegative() {
 
-        Country country = new Country();
-        country.setName(countryName);
-        country.setCode(countryCode);
-        country.setCapacity(countryCapacity);
-        country.setSchool(school());
-        country.setType(type);
+        Location location = new Location();
+        location.setName(locationName);
+        location.setCode(locationCode);
+        location.setCapacity(locationCapacity);
+        location.setSchool(school());
+        location.setType(type);
 
 
         given()
                 .cookies(cookies)
                 .contentType(ContentType.JSON)
-                .body(country)
+                .body(location)
 
                 .when()
                 .post("school-service/api/location")
@@ -124,81 +124,81 @@ public class Locations {
         ;
     }
 
-    @Test(dependsOnMethods = "createCountryNegative")
-    public void updateCountry() {
+    @Test(dependsOnMethods = "createLocationNegative")
+    public void updateLocation() {
 
-        countryName = getRandomName();
-        Country country = new Country();
-        country.setId(countryID);
-        country.setName(countryName);
-        country.setCode(countryCode);
-        country.setCapacity(countryCapacity);
-        country.setSchool(school());
-        country.setType(type);
+        locationName = getRandomName();
+        Location location = new Location();
+        location.setId(locationID);
+        location.setName(locationName);
+        location.setCode(locationCode);
+        location.setCapacity(locationCapacity);
+        location.setSchool(school());
+        location.setType(type);
 
         given()
 
                 .cookies(cookies)
                 .contentType(ContentType.JSON)
-                .body(country)
+                .body(location)
 
                 .when()
                 .put("school-service/api/location")
 
                 .then()
                 .statusCode(200)
-                .body("name", equalTo(countryName))
+                .body("name", equalTo(locationName))
         ;
     }
 
-    @Test(dependsOnMethods = "updateCountry")
-    public void deleteCountry() {
+    @Test(dependsOnMethods = "updateLocation")
+    public void deleteLocation() {
 
         given()
                 .cookies(cookies)
-                .pathParam("countryID", countryID)
+                .pathParam("locationID", locationID)
 
 
                 .when()
-                .delete("school-service/api/location/{countryID}")
+                .delete("school-service/api/location/{locationID}")
 
                 .then()
                 .statusCode(200)
         ;
     }
 
-    @Test(dependsOnMethods = "deleteCountry")
-    public void deleteCountryNegative() {
+    @Test(dependsOnMethods = "deleteLocation")
+    public void deleteLocationNegative() {
 
         given()
                 .cookies(cookies)
-                .pathParam("countryID", countryID)
+                .pathParam("locationID", locationID)
 
                 .when()
-                .delete("school-service/api/location/{countryID}")
+                .delete("school-service/api/location/{locationID}")
 
                 .then()
                 .statusCode(400)
         ;
     }
 
-    @Test(dependsOnMethods = "deleteCountryNegative")
-    public void updateCountryNegative() {
+    @Test(dependsOnMethods = "deleteLocationNegative")
+    public void updateLocationNegative() {
 
-        countryName = getRandomName();
-        Country country = new Country();
-        country.setId(countryID);
-        country.setName(countryName);
-        country.setCode(countryCode);
-        country.setCapacity(countryCapacity);
-        country.setSchool(school());
-        country.setType(type);
+        locationName = getRandomName();
+        Location location = new Location();
+        location.setId(locationID);
+        location.setName(locationName);
+        location.setCode(locationCode);
+        location.setCapacity(locationCapacity);
+        location.setSchool(school());
+        location.setType(type);
 
 
         given()
                 .cookies(cookies)
                 .contentType(ContentType.JSON)
-                .body(country)
+                .body(location)
 
                 .when()
                 .put("school-service/api/location")
